@@ -22,6 +22,7 @@ The following configurations are required for this module:
 * cleanup: `boolean`, default `true` - all database queries will be run in a transaction,
   which will be rolled back at the end of each test
 * savepoints: `boolean`, default `true` - use savepoints to emulate nested transactions
+* session: `string`, default `\Codeception\Lib\Connector\Phalcon\MemorySession` - set the class to load for simulating the session. You can also override this using `$di->set(MemorySession::class, MyAwesomeFakeSession::class)`
 
 The application bootstrap file must return Application object but not call its handle() method.
 
@@ -400,7 +401,7 @@ Checks that current url doesn't match the given regular expression.
 ``` php
 <?php
 // to match root url
-$I->dontSeeCurrentUrlMatches('~$/users/(\d+)~');
+$I->dontSeeCurrentUrlMatches('~^/users/(\d+)~');
 ?>
 ```
 
@@ -638,7 +639,7 @@ If no parameters are provided, the full URI is returned.
 
 ``` php
 <?php
-$user_id = $I->grabFromCurrentUrl('~$/user/(\d+)/~');
+$user_id = $I->grabFromCurrentUrl('~^/user/(\d+)/~');
 $uri = $I->grabFromCurrentUrl();
 ?>
 ```
@@ -923,7 +924,7 @@ Checks that the current URL matches the given regular expression.
 ``` php
 <?php
 // to match root url
-$I->seeCurrentUrlMatches('~$/users/(\d+)~');
+$I->seeCurrentUrlMatches('~^/users/(\d+)~');
 ?>
 ```
 
