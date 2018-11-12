@@ -423,6 +423,7 @@ class Configuration
      * @param string $filename filename
      * @param mixed $nonExistentValue value used if filename is not found
      * @return array
+     * @throws ConfigurationException
      */
     protected static function getConfFromFile($filename, $nonExistentValue = [])
     {
@@ -439,6 +440,7 @@ class Configuration
      *
      * @param $suite
      * @return array
+     * @throws ConfigurationException
      */
     public static function suiteEnvironments($suite)
     {
@@ -544,7 +546,7 @@ class Configuration
 
         if (!is_writable($dir)) {
             throw new ConfigurationException(
-                "Path for output is not writable. Please, set appropriate access mode for output path."
+                "Path for output is not writable. Please, set appropriate access mode for output path: {$dir}"
             );
         }
 
@@ -554,6 +556,7 @@ class Configuration
     /**
      * Compatibility alias to `Configuration::logDir()`
      * @return string
+     * @throws ConfigurationException
      */
     public static function logDir()
     {
@@ -676,6 +679,7 @@ class Configuration
      * @param $path
      * @param $settings
      * @return array
+     * @throws ConfigurationException
      */
     protected static function loadSuiteConfig($suite, $path, $settings)
     {
@@ -711,6 +715,7 @@ class Configuration
      *
      * @param $includes
      * @return array
+     * @throws ConfigurationException
      */
     protected static function expandWildcardedIncludes(array $includes)
     {
