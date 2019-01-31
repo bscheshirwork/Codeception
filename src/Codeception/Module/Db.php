@@ -629,7 +629,7 @@ class Db extends CodeceptionModule implements DbInterface
         }
         try {
             // don't clear database for empty dump
-            if (isset($this->databasesSql[$databaseKey]) && !count($this->databasesSql[$databaseKey])) {
+            if (!isset($this->databasesSql[$databaseKey]) || !count($this->databasesSql[$databaseKey])) {
                 return;
             }
             $this->drivers[$databaseKey]->cleanup();
@@ -815,7 +815,7 @@ class Db extends CodeceptionModule implements DbInterface
      * @param string $column
      * @param array  $criteria
      *
-     * @return array
+     * @return mixed
      */
     protected function proceedSeeInDatabase($table, $column, $criteria)
     {
@@ -869,7 +869,7 @@ class Db extends CodeceptionModule implements DbInterface
      * @param string $column
      * @param array  $criteria
      *
-     * @return array
+     * @return mixed
      */
     public function grabFromDatabase($table, $column, $criteria = [])
     {
